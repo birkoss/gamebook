@@ -10,6 +10,7 @@ class Story(TimeStampedModel, UUIDModel, models.Model):
         null=True
     )
     title = models.CharField(max_length=200, default="")
+    is_active = models.BooleanField(default=False)
     #first_page
 
 

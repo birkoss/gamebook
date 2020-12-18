@@ -6,7 +6,9 @@ from .forms import StoryForm
 from .models import Story
 
 def home(request):
-    return render(request, "core/home.html")
+    return render(request, "core/home.html", {
+        "stories": Story.objects.filter(is_active=True)
+    })
 
 def user_login(request):
     return render(request, "core/login.html")

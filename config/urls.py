@@ -14,6 +14,7 @@ urlpatterns = [
     path('stories/add/', gamebook_views.edit_story, name='story/add'),
     path('stories/', gamebook_views.story_archive, name='story/archive'),
     path('stories/edit/<str:story_id>/', gamebook_views.edit_story, name='story/edit'),
+    path('stories/activate/<str:story_id>/', gamebook_views.edit_story, name='story/activate'),
 
     path('admin/', admin.site.urls),
 
