@@ -38,6 +38,8 @@ INSTALLED_APPS = [
 
     'core',
     'users',
+
+    'gamebook',
 ]
 
 
