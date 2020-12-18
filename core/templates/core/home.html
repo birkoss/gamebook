@@ -1,0 +1,42 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+		<h1 class="h2">Bibliothèque</h1>
+		<a  class="btn btn-primary btn-sm">Créer</a>
+	</div>
+
+	{% if libraries %}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th scope="col">Nom</th>
+					<th scope="col">Status</th>
+					<th scope="col">Catégories</th>
+					<th scope="col">Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for library in libraries %}
+				<tr>
+					<td>{{ library.name }}</td>
+					<td>{% if library.active %}<span class="badge badge-success">publiée</span>{% else %}<span class="badge badge-warning">non-publiée</span>{% endif %}</td>
+					<td><a >{{ library.librarycategory_set.all.count }} catégorie(s)</a></td>
+					<td>
+						
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	{% else %}
+		<div class="alert alert-warning" role="alert">
+			Vous n'avez aucune bibiothèque. Créer une <a >nouvelle bibliothèque</a>.
+		</div>
+	{% endif %}
+
+</div>
+
+{% endblock %}
