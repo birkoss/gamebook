@@ -6,7 +6,7 @@
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
         <h1 class="h2">Histoires disponibles</h1>
         {% if user.is_authenticated %}
-            <a  class="btn btn-primary btn-sm">Créer</a>
+            <a href="{% url 'story/add' %}" class="btn btn-primary btn-sm">Créer</a>
         {% endif %}
 	</div>
 
