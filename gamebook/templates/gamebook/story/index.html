@@ -12,7 +12,7 @@
 	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
 		<h1 class="h2">Mes histoires</h1>
 		<div class="actions">
-			<a href="" class="btn btn-primary btn-sm">Créer</a>
+			<a href="{% url 'story/add' %}" class="btn btn-primary btn-sm">Créer une nouvelle histoire</a>
 		</div>
 	</div>
 
@@ -35,8 +35,8 @@
                             <a class="card-link" href="{% url 'story/activate' story.id %}">Publier</a>
                         {% endif %}
                       </div>
-                      <div class="card-footer text-muted">
-                        {{ story.page_set.all.count }} page(s)
+                      <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                        {{ story.page_set.all.count }} page(s) <a href="{% url 'page/archive' story.id %}" class="btn btn-secondary btn-sm">Modifier les pages</a>
                       </div>
                 </div>
             {% endfor %}

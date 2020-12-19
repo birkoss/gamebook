@@ -19,3 +19,19 @@ class StoryForm(forms.Form):
 			raise ValidationError(_('Validation Error !!'))
 
 		return data
+
+class PageForm(forms.Form):
+	error_css_class = "alert alert-danger"
+
+	content = forms.CharField(
+        widget=forms.Textarea(attrs={'class':'form-control'}),
+        label="Contenu"
+    )
+
+	def clean_content(self):
+		data = self.cleaned_data['content']
+
+		if data == "error":
+			raise ValidationError(_('Validation Error !!'))
+
+		return data

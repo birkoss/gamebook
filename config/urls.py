@@ -16,6 +16,11 @@ urlpatterns = [
     path('stories/edit/<str:story_id>/', gamebook_views.edit_story, name='story/edit'),
     path('stories/activate/<str:story_id>/', gamebook_views.edit_story, name='story/activate'),
 
+
+    path('pages/<str:story_id>/add/', gamebook_views.edit_page, name='page/add'),
+    path('pages/<str:story_id>/edit/<str:page_id>/', gamebook_views.edit_page, name='page/edit'),
+    path('pages/<str:story_id>/', gamebook_views.page_archive, name='page/archive'),
+
     path('admin/', admin.site.urls),
 
     re_path(r'^oauth/', include('social_django.urls', namespace='social')),

@@ -1,0 +1,43 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+
+	{% if request.GET.status == "updated" %}
+		<p class="alert alert-success">Mise à jour réussie!</p>
+	{% elif request.GET.status == "created" %}
+		<p class="alert alert-success">Création réussie!</p>
+	{% endif %}
+
+	<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+		<h1 class="h2">{{ story.title }}</h1>
+		<div class="actions">
+            <a href="{% url 'story/archive' %}" class="btn btn-outline-secondary btn-sm mr-3">Retour aux histoires</a>
+			<a href="{% url 'page/add' story.id %}" class="btn btn-primary btn-sm">Créer une nouvelle page</a>
+		</div>
+	</div>
+
+    {% if pages %}
+        
+        <div class="card-container">
+            {% for page in pages %}
+                <div class="card text-white bg-{% if page.is_active %}secondary{% else %}secondary{% endif %}">
+                    <div class="card-body">
+                        {{ page.content|truncatechars:100 }}
+                      </div>
+                      <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                        {{ page.action_set.all.count }} action(s) <a href="{% url 'page/edit' story.id page.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+                      </div>
+                </div>
+            {% endfor %}
+        </div>
+
+	{% else %}
+		<div class="alert alert-warning" role="alert">
+			Cette histoire n'a aucune page pour le moment. Créer une <a href="{% url 'page/add' story.id %}">première page</a>.
+		</div>
+	{% endif %}
+
+</div>
+
+{% endblock %}
