@@ -13,18 +13,45 @@ urlpatterns = [
 
     path('stories/add/', gamebook_views.edit_story, name='story/add'),
     path('stories/', gamebook_views.story_archive, name='story/archive'),
-    path('stories/edit/<str:story_id>/', gamebook_views.edit_story, name='story/edit'),
-    path('stories/activate/<str:story_id>/', gamebook_views.edit_story, name='story/activate'),
+    path(
+        'stories/edit/<str:story_id>/',
+        gamebook_views.edit_story,
+        name='story/edit'
+    ),
+    path(
+        'stories/activate/<str:story_id>/',
+        gamebook_views.edit_story,
+        name='story/activate'
+    ),
 
+    path(
+        'pages/<str:story_id>/add/',
+        gamebook_views.edit_page,
+        name='page/add'
+    ),
+    path(
+        'pages/<str:story_id>/edit/<str:page_id>/',
+        gamebook_views.edit_page,
+        name='page/edit'
+    ),
+    path(
+        'pages/<str:story_id>/',
+        gamebook_views.page_archive,
+        name='page/archive'
+    ),
 
-    path('pages/<str:story_id>/add/', gamebook_views.edit_page, name='page/add'),
-    path('pages/<str:story_id>/edit/<str:page_id>/', gamebook_views.edit_page, name='page/edit'),
-    path('pages/<str:story_id>/', gamebook_views.page_archive, name='page/archive'),
+    path(
+        'actions/<str:page_id>/add/',
+        gamebook_views.edit_action,
+        name='action/add'
+    ),
+    path(
+        'actions/<str:page_id>/edit/<str:action_id>/',
+        gamebook_views.edit_action,
+        name='action/edit'
+    ),
 
-    path('actions/<str:page_id>/add/', gamebook_views.edit_action, name='action/add'),
-    path('actions/<str:page_id>/edit/<str:action_id>/', gamebook_views.edit_action, name='action/edit'),
-
-    path('page/<str:page_id>/', gamebook_views.play, name='play'),
+    path('page/<str:page_id>/', gamebook_views.edit_action, name='play'),
 
     path('admin/', admin.site.urls),
 

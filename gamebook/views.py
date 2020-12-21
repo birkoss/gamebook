@@ -33,6 +33,7 @@ def play(request, page_id):
         "page": page,
     })
 
+
 @login_required
 def user_logout(request):
     logout(request)
@@ -182,7 +183,9 @@ def edit_page(request, story_id, page_id=None):
         actions.append({
             "label": action.label,
             "id": action.id,
-            "destination": Page.objects.filter(pk=action.extra['destination']).first()
+            "destination": Page.objects.filter(
+                id=action.extra['destination']
+            ).first()
         })
 
     return render(request, 'gamebook/page/edit.html', {
