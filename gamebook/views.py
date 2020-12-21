@@ -121,6 +121,7 @@ def edit_page(request, story_id, page_id=None):
             if page_id is None:
                 page = Page(story=story)
 
+            page.title = form.cleaned_data['title']
             page.content = form.cleaned_data['content']
             page.save()
 
@@ -128,6 +129,7 @@ def edit_page(request, story_id, page_id=None):
 
     elif page_id:
         form = PageForm(initial={
+            'title': page.title,
             'content': page.content
         })
     else:

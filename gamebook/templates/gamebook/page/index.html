@@ -22,6 +22,9 @@
         <div class="card-container">
             {% for page in pages %}
                 <div class="card text-white bg-{% if page.is_active %}secondary{% else %}secondary{% endif %}">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        {{ page.title }}
+                    </div>
                     <div class="card-body">
                         {{ page.content|truncatechars:100 }}
                       </div>

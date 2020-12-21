@@ -21,6 +21,8 @@ class Page(TimeStampedModel, UUIDModel, models.Model):
         null=False
     )
 
+    title = models.CharField(max_length=200, default="")
+
     content = models.TextField(
         default=""
     )

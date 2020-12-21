@@ -23,6 +23,11 @@ class StoryForm(forms.Form):
 class PageForm(forms.Form):
 	error_css_class = "alert alert-danger"
 
+	title = forms.CharField(
+        widget=forms.TextInput(attrs={'class':'form-control'}),
+        label="Titre"
+    )
+
 	content = forms.CharField(
         widget=forms.Textarea(attrs={'class':'form-control'}),
         label="Contenu"
@@ -30,6 +35,14 @@ class PageForm(forms.Form):
 
 	def clean_content(self):
 		data = self.cleaned_data['content']
+
+		if data == "error":
+			raise ValidationError(_('Validation Error !!'))
+
+		return data
+
+	def clean_title(self):
+		data = self.cleaned_data['title']
 
 		if data == "error":
 			raise ValidationError(_('Validation Error !!'))
