@@ -24,6 +24,8 @@ urlpatterns = [
     path('actions/<str:page_id>/add/', gamebook_views.edit_action, name='action/add'),
     path('actions/<str:page_id>/edit/<str:action_id>/', gamebook_views.edit_action, name='action/edit'),
 
+    path('page/<str:page_id>/', gamebook_views.play, name='play'),
+
     path('admin/', admin.site.urls),
 
     re_path(r'^oauth/', include('social_django.urls', namespace='social')),

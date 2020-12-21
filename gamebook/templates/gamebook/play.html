@@ -1,0 +1,14 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<div class="container">
+
+    <h1 class="h2 my-3">{{ page.story.title }}</h1>
+    
+    <h2 class="h3 py-3">{{ page.title }}</h2>
+
+    <p>{{ page.content | linebreaks }}</p>
+
+</div>
+
+{% endblock %}

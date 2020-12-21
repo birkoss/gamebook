@@ -7,14 +7,31 @@ from .models import Action, Page, Story
 
 
 def home(request):
+    stories = []
+
+    for story in Story.objects.filter(is_active=True):
+        stories.append({
+            "title": story.title,
+            "first_page": Page.objects.filter(
+                is_first_page=True, story=story
+            ).first()
+        })
+
     return render(request, "core/home.html", {
-        "stories": Story.objects.filter(is_active=True)
+        "stories": stories,
     })
 
 
 def user_login(request):
     return render(request, "core/login.html")
 
+
+def play(request, page_id):
+    page = get_object_or_404(Page, id=page_id)
+
+    return render(request, "gamebook/play.html", {
+        "page": page,
+    })
 
 @login_required
 def user_logout(request):
