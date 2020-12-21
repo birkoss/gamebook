@@ -36,6 +36,10 @@ class PageForm(forms.Form):
         label="Contenu"
     )
 
+    is_first_page = forms.BooleanField(
+        label="Page Principale?"
+    )
+
     def clean_content(self):
         data = self.cleaned_data['content']
 

@@ -134,11 +134,15 @@ def edit_page(request, story_id, page_id=None):
         form = PageForm(request.POST)
 
         if form.is_valid():
+            # If this is the new First Page, be sure it's the only one
+            Page.objects.filter(story=story).update(is_first_page=False)
+
             if page_id is None:
                 page = Page(story=story)
 
             page.title = form.cleaned_data['title']
             page.content = form.cleaned_data['content']
+            page.is_first_page = form.cleaned_data['is_first_page']
             page.save()
 
             return redirect(
@@ -150,7 +154,8 @@ def edit_page(request, story_id, page_id=None):
     elif page_id:
         form = PageForm(initial={
             'title': page.title,
-            'content': page.content
+            'content': page.content,
+            "is_first_page": page.is_first_page,
         })
     else:
         form = PageForm()

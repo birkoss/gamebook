@@ -11,7 +11,9 @@ class Story(TimeStampedModel, UUIDModel, models.Model):
     )
     title = models.CharField(max_length=200, default="")
     is_active = models.BooleanField(default=False)
-    # first_page
+
+    def __str__(self):
+        return self.title
 
 
 class Page(TimeStampedModel, UUIDModel, models.Model):
@@ -25,6 +27,10 @@ class Page(TimeStampedModel, UUIDModel, models.Model):
 
     content = models.TextField(
         default=""
+    )
+
+    is_first_page = models.BooleanField(
+        default=False
     )
 
     def __str__(self):
