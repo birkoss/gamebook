@@ -1,7 +1,7 @@
 from .base import *
 
 
-ALLOWED_HOSTS = ['']
+ALLOWED_HOSTS = ['gamebook.birkoss.com']
 
 DEBUG = True
 
@@ -20,5 +20,5 @@ DATABASES = {
 }
 
 
-STATIC_URL = 'https://cdn.birkoss.com/assets/api/'
-STATIC_ROOT = '/home/birkoss/domains/cdn.birkoss.com/public_html/assets/api/'
+STATIC_URL = 'https://gamebookcdn.birkoss.com/assets/api/'
+STATIC_ROOT = '/home/gamebook/domains/gamebookcdn.birkoss.com/public_html/assets/api/'
