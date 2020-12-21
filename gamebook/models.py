@@ -11,7 +11,7 @@ class Story(TimeStampedModel, UUIDModel, models.Model):
     )
     title = models.CharField(max_length=200, default="")
     is_active = models.BooleanField(default=False)
-    #first_page
+    # first_page
 
 
 class Page(TimeStampedModel, UUIDModel, models.Model):
@@ -26,6 +26,9 @@ class Page(TimeStampedModel, UUIDModel, models.Model):
     content = models.TextField(
         default=""
     )
+
+    def __str__(self):
+        return self.title
 
 
 class Action(TimeStampedModel, UUIDModel, models.Model):
@@ -44,7 +47,10 @@ class Action(TimeStampedModel, UUIDModel, models.Model):
 
     def save(self, *args, **kwargs):
         if self.order == 0:
-            action = Action.objects.filter(page=self.page).order_by("-order").first()
+            action = Action.objects.filter(
+                page=self.page
+            ).order_by("-order").first()
+
             if action is not None:
                 self.order = action.order + 1
             else:

@@ -18,44 +18,50 @@
 		<table class="table">
 			{{ form }}
         </table>
-        
-        <hr class="my-4" />
-
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
-            <h2 class="h3">Actions</h2>
-
-            <div class="actions">
-                <a href="{% url 'page/add' story.id %}" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#actionModal">Ajouter une nouvelle action</a>
-            </div>
-        </div>
-        
 
 		<div class="buttons">
 			<input class="btn btn-primary" type="submit" value="{{ button }}" />
 			<a href="{% url 'page/archive' story.id %}" class="btn btn-outline-secondary">Annuler</a>
 		</div>
     </form>
-    
 
-    <div class="modal" id="actionModal">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Action</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <p>Lien vers une page:</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
+    <hr class="my-4" />
+
+    {% if action == "edit" %}
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3">
+            <h2 class="h3">Actions</h2>
+
+            <div class="actions">
+                <a href="{% url 'action/add' page_id %}" class="btn btn-primary btn-sm">Ajouter une nouvelle action</a>
             </div>
         </div>
-    </div>
+
+        {% if actions %}
+            <div class="card-container">
+                {% for action in actions %}
+                    <div class="card text-white bg-{% if action.is_active %}secondary{% else %}secondary{% endif %}">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            {{ action.label }}
+                        </div>
+                        <div class="card-body">
+                            {{ action.destination }}
+                        </div>
+                        <div class="card-footer text-muted d-flex justify-content-between align-items-center">
+                            <a href="{% url 'action/edit' page.id action.id %}" class="btn btn-secondary btn-sm">Modifier</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <div class="alert alert-warning" role="alert">
+                Cette histoire n'a aucune page pour le moment. Créer une <a href="{% url 'page/add' story.id %}">première page</a>.
+            </div>
+        {% endif %}
+
+    {% else %}
+        <p>Vous allez pouvoir créer des actions lorsque la page sera enregistrée.</p>
+    {% endif %}
 
 </div>
 
