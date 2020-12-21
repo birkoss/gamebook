@@ -9,6 +9,9 @@
 
     <p>{{ page.content | linebreaks }}</p>
 
+    {% for action in actions %}
+        <a class="btn btn-primary" href="{% url 'play' action.destination.id %}">{{ action.label }}</a>
+    {% endfor %}
 </div>
 
 {% endblock %}

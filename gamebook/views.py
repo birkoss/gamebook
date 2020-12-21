@@ -29,8 +29,18 @@ def user_login(request):
 def play(request, page_id):
     page = get_object_or_404(Page, id=page_id)
 
+    actions = []
+    for action in Action.objects.filter(page=page):
+        actions.append({
+            "label": action.label,
+            "destination": Page.objects.filter(
+                id=action.extra['destination']
+            ).first()
+        })
+
     return render(request, "gamebook/play.html", {
         "page": page,
+        "actions": actions,
     })
 
 

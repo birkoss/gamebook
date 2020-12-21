@@ -51,7 +51,7 @@ urlpatterns = [
         name='action/edit'
     ),
 
-    path('page/<str:page_id>/', gamebook_views.edit_action, name='play'),
+    path('page/<str:page_id>/', gamebook_views.play, name='play'),
 
     path('admin/', admin.site.urls),
 
